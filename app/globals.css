@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --red:     #FF2D20;
+  --purple:  #9333EA;
+  --gold:    #F59E0B;
+  --bg:      #070708;
+  --card:    #0E0E10;
+  --card2:   #141416;
+  --border:  #1F1F23;
+  --border2: #2A2A30;
+  --text:    #F0F0F0;
+  --muted:   #6B6B78;
+  --muted2:  #3A3A42;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Subtle noise grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .022;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+/* ── Utility ────────────────────────────────────────────────── */
+.font-display { font-family: 'Bebas Neue', sans-serif; }
+
+.text-red    { color: var(--red); }
+.text-purple { color: var(--purple); }
+.text-gold   { color: var(--gold); }
+.text-muted  { color: var(--muted); }
+
+.bg-card  { background: var(--card); }
+.bg-card2 { background: var(--card2); }
+
+.border-base  { border-color: var(--border); }
+.border-base2 { border-color: var(--border2); }
+
+/* Gradient text */
+.grad-text {
+  background: linear-gradient(135deg, var(--red) 0%, var(--purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow helpers */
+.glow-red    { box-shadow: 0 0 28px rgba(255,45,32,.25); }
+.glow-purple { box-shadow: 0 0 28px rgba(147,51,234,.22); }
+
+/* Card hover lift */
+.card-lift {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.55);
+}
+
+/* Shimmer skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--card) 25%, var(--card2) 50%, var(--card) 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* Stagger helpers */
+.d-100 { animation-delay: .10s; }
+.d-200 { animation-delay: .20s; }
+.d-300 { animation-delay: .30s; }
+.d-400 { animation-delay: .40s; }
+.d-500 { animation-delay: .50s; }
+.d-600 { animation-delay: .60s; }
+.d-700 { animation-delay: .70s; }
+.d-800 { animation-delay: .80s; }
+
+/* Input base */
+.inp {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .875rem;
+  transition: border-color .2s ease, box-shadow .2s ease;
+  outline: none;
+}
+.inp::placeholder { color: var(--muted2); }
+.inp:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(255,45,32,.12);
+}
+
+/* Select arrow */
+select.inp { appearance: none; cursor: pointer; }
