@@ -81,7 +81,7 @@ export default function HeroSection({ avgRating, totalReviews }: Props) {
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '.88'; (e.currentTarget as HTMLElement).style.transform = 'scale(1.04)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '1'; (e.currentTarget as HTMLElement).style.transform = 'scale(1)' }}
           >Lihat Pricelist →</a>
-          <a href="https://wa.me/6208895114939" target="_blank" rel="noreferrer"
+          <a href="https://wa.me/6288991114939" target="_blank" rel="noreferrer"
             style={{ background: 'transparent', color: '#F0F0F0', padding: '12px 26px', borderRadius: 12, fontWeight: 500, fontSize: '.88rem', textDecoration: 'none', border: '1px solid #1F1F23', transition: 'border-color .2s, transform .2s', flex: '1 1 auto', maxWidth: 220, textAlign: 'center' }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = '#3A3A42'; (e.currentTarget as HTMLElement).style.transform = 'scale(1.03)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = '#1F1F23'; (e.currentTarget as HTMLElement).style.transform = 'scale(1)' }}

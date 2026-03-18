@@ -15,7 +15,7 @@ export default function ContactSection() {
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
-            <a href="https://wa.me/6208895114939" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/6288991114939" target="_blank" rel="noreferrer"
               style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#25D366', color: '#fff', padding: '12px 24px', borderRadius: 12, fontWeight: 600, fontSize: '.88rem', textDecoration: 'none', transition: 'opacity .2s, transform .2s', boxShadow: '0 0 24px rgba(37,211,102,.25)', flex: '1 1 auto', justifyContent: 'center', maxWidth: 240 }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '.88'; (e.currentTarget as HTMLElement).style.transform = 'scale(1.03)' }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '1'; (e.currentTarget as HTMLElement).style.transform = 'scale(1)' }}
@@ -25,7 +25,7 @@ export default function ContactSection() {
             </a>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#0E0E10', border: '1px solid #1F1F23', padding: '12px 20px', borderRadius: 12, flex: '1 1 auto', justifyContent: 'center', maxWidth: 220 }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B6B78" strokeWidth="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              <span style={{ color: '#6B6B78', fontSize: '.8rem', fontFamily: 'JetBrains Mono, monospace' }}>0889-9114-4939</span>
+              <span style={{ color: '#6B6B78', fontSize: '.8rem', fontFamily: 'JetBrains Mono, monospace' }}>0889-9111-4939</span>
             </div>
           </div>
 
