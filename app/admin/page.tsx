@@ -109,7 +109,11 @@ export default function AdminPage() {
 
   async function toggleProd(id: string, val: boolean) {
     setBusy(id)
-    await supabase.from('products').update({ is_active: val }).eq('id', id)
+    await fetch('/api/products', {
+      method: 'PATCH',
+      headers: apiHeaders(adminToken),
+      body: JSON.stringify({ id, is_active: val }),
+    })
     setProducts(prev => prev.map(p => p.id === id ? { ...p, is_active: val } : p))
     setBusy('')
   }
@@ -117,7 +121,11 @@ export default function AdminPage() {
   async function deleteProd(id: string) {
     if (!confirm('Hapus produk ini?')) return
     setBusy(id)
-    await supabase.from('products').delete().eq('id', id)
+    await fetch('/api/products', {
+      method: 'DELETE',
+      headers: apiHeaders(adminToken),
+      body: JSON.stringify({ id }),
+    })
     setProducts(prev => prev.filter(p => p.id !== id))
     setBusy('')
   }
@@ -126,7 +134,11 @@ export default function AdminPage() {
     const price = parseInt(editVal)
     if (isNaN(price) || price <= 0) return
     setBusy(id)
-    await supabase.from('products').update({ price, updated_at: new Date().toISOString() }).eq('id', id)
+    await fetch('/api/products', {
+      method: 'PATCH',
+      headers: apiHeaders(adminToken),
+      body: JSON.stringify({ id, price, updated_at: new Date().toISOString() }),
+    })
     setProducts(prev => prev.map(p => p.id === id ? { ...p, price } : p))
     setEditId(''); setBusy('')
   }
@@ -135,13 +147,18 @@ export default function AdminPage() {
     e.preventDefault()
     if (!nName.trim() || !nDur.trim() || !nPrice) return
     setAdding(true)
-    const { data, error } = await supabase.from('products').insert({
-      category: nCat, name: nName.trim(), duration: nDur.trim(),
-      price: parseInt(nPrice), is_active: true,
-      sort_order: products.filter(p => p.category === nCat).length + 1,
-    }).select().single()
-    if (!error && data) {
-      setProducts(prev => [...prev, data])
+    const res = await fetch('/api/products', {
+      method: 'POST',
+      headers: apiHeaders(adminToken),
+      body: JSON.stringify({
+        category: nCat, name: nName.trim(), duration: nDur.trim(),
+        price: parseInt(nPrice), is_active: true,
+        sort_order: products.filter(p => p.category === nCat).length + 1,
+      }),
+    })
+    const data = await res.json()
+    if (data.product) {
+      setProducts(prev => [...prev, data.product])
       setNName(''); setNDur(''); setNPrice(''); setShowAdd(false)
     }
     setAdding(false)

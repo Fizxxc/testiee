@@ -120,3 +120,8 @@ body::after {
 
 /* Select arrow */
 select.inp { appearance: none; cursor: pointer; }
+
+/* Responsive: hide "mulai dari" label on small screens */
+@media (max-width: 500px) {
+  .hide-mobile { display: none; }
+}

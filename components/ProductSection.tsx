@@ -55,7 +55,7 @@ export default function ProductSection({ category, products }: Props) {
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ color: '#3A3A42', fontSize: '.7rem', fontFamily: 'JetBrains Mono, monospace', display: window.innerWidth > 500 ? undefined : 'none' }}>mulai dari</span>
+              <span className="hide-mobile" style={{ color: '#3A3A42', fontSize: '.7rem', fontFamily: 'JetBrains Mono, monospace' }}>mulai dari</span>
               <span className="font-display" style={{ fontSize: 'clamp(1.4rem,2.5vw,1.8rem)', color: m.color, letterSpacing: '.03em' }}>{p.price}K</span>
             </div>
           </div>

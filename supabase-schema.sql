@@ -69,3 +69,16 @@ insert into testimonials (name, product_name, rating, message, is_approved) valu
   ('Budi H.','YouTube Premium 30 Hari',4,'Harga murah kualitas terjamin. Bakal order lagi bulan depan!',true),
   ('Sari M.','Capcut Pro 35 Hari',5,'Proses cepat, langsung bisa dipake. Terima kasih kographh!',true),
   ('Andre K.','Gemini Pro 3 Bulan',5,'Worth it banget buat kerjaan. Seller ramah dan profesional.',true);
+
+-- ============================================================
+-- PERBAIKAN RLS: Tambahkan policy write untuk admin via service_role
+-- Catatan: service_role key BYPASS semua RLS secara otomatis,
+-- jadi tidak perlu policy tambahan untuk admin API routes.
+-- Yang perlu dipastikan adalah anon key HANYA bisa:
+-- 1. SELECT products (is_active = true)
+-- 2. SELECT testimonials (is_approved = true)  
+-- 3. INSERT testimonials (untuk submit form user)
+-- 4. SELECT invite_links (is_active = true)
+-- Semua write admin (insert/update/delete products, approve testimonials)
+-- dilakukan via API Route dengan service_role key → bypass RLS otomatis.
+-- ============================================================
