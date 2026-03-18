@@ -6,21 +6,24 @@
 
 /* ── Design Tokens ─────────────────────────────────────────── */
 :root {
-  --red:     #FF2D20;
-  --purple:  #9333EA;
-  --gold:    #F59E0B;
-  --bg:      #070708;
-  --card:    #0E0E10;
-  --card2:   #141416;
-  --border:  #1F1F23;
-  --border2: #2A2A30;
-  --text:    #F0F0F0;
-  --muted:   #6B6B78;
-  --muted2:  #3A3A42;
+  --red:      #FF2D20;
+  --purple:   #9333EA;
+  --gold:     #F59E0B;
+  --green:    #22C55E;
+  --bg:       #070708;
+  --card:     #0E0E10;
+  --card2:    #141416;
+  --border:   #1F1F23;
+  --border2:  #2A2A30;
+  --text:     #F0F0F0;
+  --muted:    #6B6B78;
+  --muted2:   #3A3A42;
+
+  /* Mobile bottom nav height */
+  --nav-h: 72px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -37,7 +40,7 @@ body::after {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 9998;
   opacity: .022;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
@@ -47,21 +50,9 @@ body::after {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-/* ── Utility ────────────────────────────────────────────────── */
+/* ── Utilities ───────────────────────────────────────────────── */
 .font-display { font-family: 'Bebas Neue', sans-serif; }
 
-.text-red    { color: var(--red); }
-.text-purple { color: var(--purple); }
-.text-gold   { color: var(--gold); }
-.text-muted  { color: var(--muted); }
-
-.bg-card  { background: var(--card); }
-.bg-card2 { background: var(--card2); }
-
-.border-base  { border-color: var(--border); }
-.border-base2 { border-color: var(--border2); }
-
-/* Gradient text */
 .grad-text {
   background: linear-gradient(135deg, var(--red) 0%, var(--purple) 100%);
   -webkit-background-clip: text;
@@ -69,11 +60,6 @@ body::after {
   background-clip: text;
 }
 
-/* Glow helpers */
-.glow-red    { box-shadow: 0 0 28px rgba(255,45,32,.25); }
-.glow-purple { box-shadow: 0 0 28px rgba(147,51,234,.22); }
-
-/* Card hover lift */
 .card-lift {
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
@@ -82,24 +68,21 @@ body::after {
   box-shadow: 0 16px 40px rgba(0,0,0,.55);
 }
 
-/* Shimmer skeleton */
 .skeleton {
   background: linear-gradient(90deg, var(--card) 25%, var(--card2) 50%, var(--card) 75%);
   background-size: 400px 100%;
   animation: shimmer 1.6s linear infinite;
 }
 
-/* Stagger helpers */
+/* Animation delays */
 .d-100 { animation-delay: .10s; }
 .d-200 { animation-delay: .20s; }
 .d-300 { animation-delay: .30s; }
 .d-400 { animation-delay: .40s; }
 .d-500 { animation-delay: .50s; }
 .d-600 { animation-delay: .60s; }
-.d-700 { animation-delay: .70s; }
-.d-800 { animation-delay: .80s; }
 
-/* Input base */
+/* Input */
 .inp {
   width: 100%;
   background: var(--card);
@@ -117,11 +100,134 @@ body::after {
   border-color: var(--red);
   box-shadow: 0 0 0 3px rgba(255,45,32,.12);
 }
-
-/* Select arrow */
 select.inp { appearance: none; cursor: pointer; }
 
-/* Responsive: hide "mulai dari" label on small screens */
-@media (max-width: 500px) {
-  .hide-mobile { display: none; }
+/* ── Mobile bottom nav padding ───────────────────────────────── */
+/* On mobile, add bottom padding so content doesn't hide behind nav */
+@media (max-width: 767px) {
+  .mobile-pad { padding-bottom: calc(var(--nav-h) + 16px); }
+}
+
+/* ── Desktop: hide mobile-only elements ─────────────────────── */
+@media (min-width: 768px) {
+  .mobile-only { display: none !important; }
+}
+
+/* ── Mobile: hide desktop-only elements ─────────────────────── */
+@media (max-width: 767px) {
+  .desktop-only { display: none !important; }
+}
+
+/* ── Bottom nav (mobile) ─────────────────────────────────────── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  z-index: 9999;
+  background: rgba(10, 10, 12, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid #1F1F23;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px 8px;
+  /* Safe area for iPhone */
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all .2s ease;
+  flex: 1;
+  max-width: 80px;
+}
+
+.bottom-nav-item.active .nav-icon { color: var(--red); }
+.bottom-nav-item.active .nav-label { color: var(--red); }
+
+.bottom-nav-item:not(.active) .nav-icon { color: var(--muted); }
+.bottom-nav-item:not(.active) .nav-label { color: var(--muted); }
+
+.bottom-nav-item.special {
+  background: var(--red);
+  max-width: 56px;
+  padding: 10px;
+  border-radius: 18px;
+  margin-top: -20px;
+  box-shadow: 0 0 24px rgba(255,45,32,.4), 0 4px 16px rgba(0,0,0,.4);
+}
+.bottom-nav-item.special .nav-icon { color: #fff !important; }
+
+.nav-icon {
+  transition: color .2s, transform .2s;
+}
+.nav-label {
+  font-size: .6rem;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: color .2s;
+}
+
+/* ── Mobile hero tweaks ──────────────────────────────────────── */
+@media (max-width: 767px) {
+  .hero-badges { display: none !important; }
+  .hero-stats { gap: 20px !important; }
+  .hero-stats > div { gap: 12px !important; }
+}
+
+/* ── Product row responsive ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .prod-from { display: none; }
+}
+
+/* ── Testimonial grid ───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .testi-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Mobile section spacing ─────────────────────────────────── */
+@media (max-width: 767px) {
+  .section-pad {
+    padding: 48px 16px !important;
+  }
+  .section-pad-sm {
+    padding: 32px 16px !important;
+  }
+}
+
+/* ── Mobile card strip (horizontal scroll) ──────────────────── */
+.card-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.card-strip::-webkit-scrollbar { display: none; }
+.card-strip-item { flex-shrink: 0; }
+
+/* ── Pull-up animation ──────────────────────────────────────── */
+@keyframes pullUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.pull-up {
+  animation: pullUp .5s ease forwards;
+  opacity: 0;
 }

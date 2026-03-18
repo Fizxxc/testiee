@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { supabase, type Product, type InviteLink } from '@/lib/supabase'
 import StarRating from '@/components/StarRating'
 import Link from 'next/link'
+import { MobileNav } from '@/components/Navbar'
 
 type Status = 'loading' | 'valid' | 'invalid' | 'expired' | 'submitting' | 'success'
 
@@ -125,7 +126,7 @@ export default function InvitePage({ params }: { params: { slug: string } }) {
           <Link href="/" style={{ background:'#FF2D20', color:'#fff', padding:'11px 22px', borderRadius:11, fontWeight:600, fontSize:'.85rem', textDecoration:'none' }}>
             Lihat Pricelist
           </Link>
-          <a href="https://wa.me/6288991114939" target="_blank" rel="noreferrer"
+          <a href="https://wa.me/6208895114939" target="_blank" rel="noreferrer"
             style={{ background:'#141416', color:'#888', border:'1px solid #1F1F23', padding:'11px 22px', borderRadius:11, fontWeight:500, fontSize:'.85rem', textDecoration:'none' }}>
             WhatsApp Order Lagi
           </a>
